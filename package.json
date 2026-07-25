@@ -60,7 +60,7 @@
     "jsdom": "^29.1.1",
     "tailwindcss": "^4.0.7",
     "vite": "^6.1.0",
-    "vitest": "^3.2.7"
+    "vitest": "^4.1.10"
   },
   "engines": {
     "node": ">=20.0.0",
