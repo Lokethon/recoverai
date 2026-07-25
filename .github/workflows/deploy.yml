@@ -51,9 +51,8 @@ jobs:
         # page (/recoverai/), a user page (/), and a custom domain alike.
         run: npm run build -- --base="${{ steps.pages.outputs.base_path }}/"
         env:
-          # No API key is baked into the bundle. Visitors supply their own key
-          # in Settings, which is stored only in their browser's localStorage.
           NODE_ENV: production
+          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
 
       - name: Add SPA fallback
         # GitHub Pages has no rewrite rules. Serving index.html as 404.html
