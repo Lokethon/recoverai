@@ -2,7 +2,12 @@
 
 > 🏆 **Google PromptWars Hackathon** | Build with AI | Google for Developers × H2S
 
+### [▶️ Try the live app](https://lokethon.github.io/recoverai/)
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-lokethon.github.io%2Frecoverai-4f46e5?style=for-the-badge)](https://lokethon.github.io/recoverai/)
+
 [![CI](https://github.com/Lokethon/recoverai/actions/workflows/ci.yml/badge.svg)](https://github.com/Lokethon/recoverai/actions/workflows/ci.yml)
+[![Deploy](https://github.com/Lokethon/recoverai/actions/workflows/deploy.yml/badge.svg)](https://github.com/Lokethon/recoverai/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![Vite 6](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vite.dev)
@@ -132,6 +137,8 @@ The app will be available at **`http://localhost:3000/`**.
 
 ### Gemini API Key Setup
 
+> Using the [live app](https://lokethon.github.io/recoverai/)? Same steps — no installation needed. Your key stays in your own browser.
+
 The app works without a key — AI features are simply disabled. To enable them:
 
 1. Open the app and click the **⚙️ Settings** icon in the navbar
@@ -206,20 +213,30 @@ CI runs lint, tests, and a production build against Node 18, 20, and 22 on every
 
 ## 🌐 Deployment
 
-The app is a static SPA and deploys to any static host.
+### GitHub Pages (live)
 
-**Vercel** (configured):
+The app deploys itself. `.github/workflows/deploy.yml` runs after CI passes on `main`, builds with the correct base path, and publishes to GitHub Pages — so every push to `main` that passes lint, tests, and build goes live automatically.
+
+No API key is baked into the published bundle. Visitors add their own key in Settings if they want the AI features; everything else works immediately.
+
+To enable it once, in the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+To deploy manually, use **Run workflow** on the *Deploy to GitHub Pages* action.
+
+### Other hosts
+
+The app is a static SPA with no backend, so it runs anywhere.
+
+**Vercel** — `vercel.json` is included with SPA rewrites, immutable asset caching, and security headers:
 
 ```bash
 npm i -g vercel
 vercel --prod
 ```
 
-`vercel.json` sets SPA rewrites, immutable asset caching, and security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`).
+**Anywhere else** — run `npm run build` and serve `dist/`. Point all routes at `/index.html` and replicate the headers from `vercel.json`.
 
-**Any other host**: run `npm run build` and serve `dist/`. Configure your host to rewrite all routes to `/index.html` and replicate the headers from `vercel.json`.
-
-> Camera, microphone, and geolocation features require **HTTPS** (or `localhost`). They will silently fail over plain HTTP.
+> Camera, microphone, and geolocation require **HTTPS** (or `localhost`). GitHub Pages and Vercel both provide it; a plain HTTP host will make those features fail silently.
 
 ---
 
