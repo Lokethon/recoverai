@@ -2,7 +2,34 @@
 
 > 🏆 **Google PromptWars Hackathon** | Build with AI | Google for Developers × H2S
 
+[![CI](https://github.com/Lokethon/recoverai/actions/workflows/ci.yml/badge.svg)](https://github.com/Lokethon/recoverai/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![Vite 6](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vite.dev)
+[![Gemini 2.5 Flash](https://img.shields.io/badge/Gemini-2.5%20Flash-4285F4?logo=google&logoColor=white)](https://ai.google.dev)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 RecoverAI is a comprehensive, AI-powered addiction recovery companion designed to help individuals achieve complete freedom from substance abuse. Built with **Google Gemini AI** at its core, it provides 24/7 intelligent emotional support, clinical-grade health monitoring, emergency crisis response, and evidence-based therapeutic tools.
+
+---
+
+## ⚠️ Important Safety & Medical Disclaimer
+
+**If you or someone else is in immediate danger, stop reading and call emergency services.**
+US: **911**, or the Suicide & Crisis Lifeline at **988**. SAMHSA National Helpline: **1-800-662-4357**.
+India: **112**, or Tele-MANAS at **14416**. Outside these regions, use your local emergency number.
+
+RecoverAI is an **educational and self-help project**, not a medical product.
+
+- **Not a medical device.** It is not FDA-cleared, CE-marked, or approved by any regulator. It does not diagnose, treat, cure, or prevent any condition.
+- **Not a substitute for professional care.** Nothing in this app replaces a doctor, therapist, counsellor, or addiction specialist. Never disregard professional advice or delay seeking it because of something this app produced.
+- **AI output can be wrong.** All AI features are powered by a large language model, which can produce inaccurate, incomplete, or inappropriate responses. Its risk scores, daily plans, CBT reframes, and crisis protocols are suggestions to discuss with a professional — not clinical assessments.
+- **Health metrics are illustrative.** Vitals, withdrawal-severity indices, and recovery timelines are self-reported or demonstration data. They are not clinically validated measurements and must not be used to make treatment decisions, including any decision about medication or detox.
+- **Withdrawal can be fatal.** Unsupervised withdrawal from alcohol, benzodiazepines, and some other substances can cause seizures or death. Never begin or change a detox based on this app. Seek medical supervision.
+- **Emergency features are supplementary.** The SOS dialer, WhatsApp alert, and camera capture depend on your device, browser permissions, and network. They can fail. Never rely on them as your only safety plan.
+- **Your data stays on your device**, but content you submit to AI features is sent to Google's Gemini API. See [SECURITY.md](SECURITY.md) before entering sensitive personal health information.
+
+Use of this software is at your own risk. It is provided "as is", without warranty of any kind, as set out in the [LICENSE](LICENSE).
 
 ---
 
@@ -50,6 +77,20 @@ RecoverAI is a comprehensive, AI-powered addiction recovery companion designed t
 
 ---
 
+## 📸 Screenshots
+
+> Drop your captures into `docs/screenshots/` using these filenames and they will appear here automatically.
+
+| Recovery Dashboard | AI Voice Coach |
+|---|---|
+| ![Home dashboard](docs/screenshots/home.png) | ![AI voice coach](docs/screenshots/voice-chat.png) |
+
+| Clinical EHR Dashboard | Emergency Crisis Center |
+|---|---|
+| ![Clinical dashboard](docs/screenshots/progress.png) | ![Emergency center](docs/screenshots/emergency.png) |
+
+---
+
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
@@ -69,8 +110,9 @@ RecoverAI is a comprehensive, AI-powered addiction recovery companion designed t
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js ≥ 18
-- npm or yarn
+- Node.js ≥ 18 (20 or 22 recommended)
+- npm ≥ 9
+- A [Google Gemini API key](https://aistudio.google.com/apikey) — free tier is sufficient
 
 ### Installation
 
@@ -86,19 +128,106 @@ npm install
 npm run dev
 ```
 
-The app will be available at `http://localhost:5173/`
-
-### Production Build
-
-```bash
-npm run build
-```
+The app will be available at **`http://localhost:3000/`**.
 
 ### Gemini API Key Setup
+
+The app works without a key — AI features are simply disabled. To enable them:
+
 1. Open the app and click the **⚙️ Settings** icon in the navbar
-2. Enter your Google Gemini API Key
-3. Click **"Test Connection"** to verify connectivity
-4. All AI features will activate automatically
+2. Paste your Google Gemini API key
+3. Click **"Test Connection"** to verify connectivity and see live latency
+4. All AI features activate automatically
+
+Your key is stored in your browser's `localStorage` and sent only to Google's API. It never reaches any RecoverAI server — there isn't one.
+
+For demo deployments where you'd rather supply the key yourself, copy `.env.example` to `.env.local` and set `VITE_GEMINI_API_KEY`. **Read the warning in that file first** — Vite inlines the value into the public bundle.
+
+---
+
+## 📜 Available Scripts
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the Vite dev server on port 3000 with HMR |
+| `npm run build` | Produce an optimised production build in `dist/` |
+| `npm run preview` | Serve the production build locally |
+| `npm run lint` | Run ESLint across the project |
+| `npm run lint:fix` | Run ESLint and auto-fix what it can |
+| `npm run test` | Run the Vitest suite once |
+| `npm run test:watch` | Run Vitest in watch mode |
+| `npm run test:coverage` | Run tests and emit a coverage report |
+
+---
+
+## 📁 Project Structure
+
+```
+recoverai/
+├── .github/
+│   ├── ISSUE_TEMPLATE/       # Bug report & feature request forms
+│   ├── workflows/ci.yml      # Lint, test & build on Node 18/20/22
+│   └── PULL_REQUEST_TEMPLATE.md
+├── src/
+│   ├── components/           # Modals, widgets, navigation
+│   ├── pages/                # Home, VoiceChat, Emergency, Progress, Resources
+│   ├── services/
+│   │   ├── gemini.js         # All Gemini API calls & structured-output schemas
+│   │   └── speech.js         # Web Speech API recognition & synthesis
+│   ├── utils/
+│   │   ├── security.js       # Input sanitisation & validation
+│   │   ├── storage.js        # localStorage persistence layer
+│   │   ├── appleHealth.js    # Health data integration helpers
+│   │   └── mockData.js       # Seed data & recovery milestones
+│   ├── test/setup.js         # Vitest + Testing Library setup
+│   ├── App.jsx               # Root component & routing state
+│   └── main.jsx              # Entry point
+├── eslint.config.js          # Flat ESLint config
+├── vitest.config.js          # Test runner config
+├── vite.config.js            # Build config
+└── vercel.json               # SPA rewrites & security headers
+```
+
+---
+
+## 🧪 Testing
+
+```bash
+npm run test           # run once
+npm run test:watch     # watch mode
+npm run test:coverage  # with coverage report
+```
+
+Tests use **Vitest** with **jsdom** and **React Testing Library**. Coverage focuses on `src/utils` and `src/services` — the sanitisation, persistence, and AI-integration layers where regressions are most costly. Component tests cover interaction and persistence behaviour rather than markup.
+
+CI runs lint, tests, and a production build against Node 18, 20, and 22 on every push and pull request.
+
+---
+
+## 🌐 Deployment
+
+The app is a static SPA and deploys to any static host.
+
+**Vercel** (configured):
+
+```bash
+npm i -g vercel
+vercel --prod
+```
+
+`vercel.json` sets SPA rewrites, immutable asset caching, and security headers (`X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`).
+
+**Any other host**: run `npm run build` and serve `dist/`. Configure your host to rewrite all routes to `/index.html` and replicate the headers from `vercel.json`.
+
+> Camera, microphone, and geolocation features require **HTTPS** (or `localhost`). They will silently fail over plain HTTP.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for setup, coding standards, and the pull request process, and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — which includes specific expectations around non-stigmatising language, given the subject matter.
+
+Found a security issue? Please report it privately as described in [SECURITY.md](SECURITY.md) rather than opening a public issue.
 
 ---
 
@@ -106,15 +235,30 @@ npm run build
 
 | Parameter | Impact | How RecoverAI Addresses It |
 |---|---|---|
-| **Code Quality** | 🟢 High | Modular React component architecture, clean separation of concerns (pages/components/services/utils), sanitized inputs |
+| **Code Quality** | 🟢 High | Modular React architecture with clean separation of concerns (pages/components/services/utils), ESLint flat config enforced in CI, documented contribution standards |
 | **Problem Statement Alignment** | 🟢 High | End-to-end addiction recovery: AI therapy, clinical monitoring, emergency response, community support |
-| **Security** | 🟡 Medium | Input sanitization (`sanitizeInput`), client-side encrypted storage, no hardcoded API keys |
-| **Efficiency** | 🟡 Medium | Vite 6 optimized build (1.7s), lazy state management, minimal re-renders |
-| **Testing** | 🔵 Low | Dynamic API connection tester, real-time build verification, all interactive buttons verified |
+| **Security** | 🟢 High | Input sanitization (`sanitizeInput`), no hardcoded API keys, documented threat model in `SECURITY.md`, security headers configured, private vulnerability disclosure, Dependabot enabled |
+| **Efficiency** | 🟡 Medium | Vite 6 optimized build, lazy state management, minimal re-renders, immutable asset caching |
+| **Testing** | 🟢 High | Vitest + React Testing Library suite covering sanitization, persistence, and component interaction; CI matrix across Node 18/20/22 running lint, tests, and build |
 | **Accessibility** | 🔵 Low | High contrast UI, keyboard navigable, WCAG-compliant color ratios, semantic HTML |
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Broaden test coverage across remaining pages and the Gemini service layer
+- [ ] Full WCAG 2.1 AA audit: focus management in modals, ARIA labels, screen reader passes
+- [ ] Resolve React Compiler advisories (currently ESLint warnings — see `eslint.config.js`)
+- [ ] Optional end-to-end encryption for locally stored journal entries
+- [ ] Offline support via a service worker, so crisis tools work without a network
+- [ ] Localisation, starting with Hindi
 
 ---
 
 ## 📝 License
 
-MIT License — Built for the Google PromptWars Hackathon 2026.
+Released under the [MIT License](LICENSE). Built for the Google PromptWars Hackathon 2026.
+
+## 🙏 Acknowledgements
+
+Recovery content and helpline information draw on public resources from SAMHSA, NIDA, the 988 Suicide & Crisis Lifeline, and Stanford Psychiatry. RecoverAI is not affiliated with or endorsed by any of these organisations.

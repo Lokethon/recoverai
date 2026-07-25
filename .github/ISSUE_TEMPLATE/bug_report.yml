@@ -1,0 +1,85 @@
+name: Bug report
+description: Report something that isn't working as expected
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report.
+
+        **Please do not include personal health information, journal contents,
+        or your Gemini API key in this issue.** Redact screenshots before
+        uploading. For security vulnerabilities, use a
+        [private advisory](https://github.com/Lokethon/recoverai/security/advisories/new)
+        instead.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area is affected?
+      options:
+        - AI features (Gemini)
+        - Voice chat / speech
+        - Health vitals & charts
+        - Emergency / SOS
+        - Journal & CBT
+        - Breathing / soundscapes
+        - Resources
+        - UI / layout
+        - Build & tooling
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: Chrome 126, Safari 17.5, Firefox 127
+    validations:
+      required: true
+
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: macOS 14.5, Windows 11, iOS 17, Android 14
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output
+      description: Any errors from the browser devtools console. Automatically formatted as code.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: I have removed any API keys or personal data from this report
+          required: true

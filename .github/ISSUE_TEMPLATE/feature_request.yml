@@ -1,0 +1,64 @@
+name: Feature request
+description: Suggest an idea or improvement
+title: "[Feature]: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion. Features that touch recovery, crisis, or
+        clinical content are held to a higher bar — please include a source
+        where you can.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the user need. Who is affected and when?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which area does this affect?
+      options:
+        - AI features (Gemini)
+        - Voice chat / speech
+        - Health vitals & charts
+        - Emergency / SOS
+        - Journal & CBT
+        - Breathing / soundscapes
+        - Resources
+        - UI / layout
+        - Build & tooling
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety considerations
+      options:
+        - label: This feature does not present itself as medical advice, diagnosis, or treatment
+        - label: This feature does not replace or delay contact with emergency services or a clinician
+        - label: This feature does not send additional personal health data to third parties
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Clinical or evidence basis
+      description: If this involves a therapeutic technique or health metric, link a credible source (SAMHSA, NIDA, peer-reviewed research).

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🆘 In crisis right now?
+    url: https://988lifeline.org/
+    about: "If you or someone else is in immediate danger, do not open a GitHub issue. Call or text 988 (US Suicide & Crisis Lifeline), call SAMHSA's National Helpline at 1-800-662-4357, or contact your local emergency number."
+  - name: 🔒 Report a security vulnerability
+    url: https://github.com/Lokethon/recoverai/security/advisories/new
+    about: Please report security issues privately, not as a public issue.
+  - name: 💬 Questions and ideas
+    url: https://github.com/Lokethon/recoverai/discussions
+    about: Ask questions or discuss ideas with the community.

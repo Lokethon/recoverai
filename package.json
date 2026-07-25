@@ -1,12 +1,38 @@
 {
   "name": "recoverai",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "RecoverAI — AI-Powered Total Drug & Addiction Recovery Platform built with Google Gemini AI for the PromptWars Hackathon",
+  "private": false,
   "type": "module",
+  "author": "Lokethon",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lokethon/recoverai.git"
+  },
+  "homepage": "https://github.com/Lokethon/recoverai#readme",
+  "keywords": [
+    "addiction-recovery",
+    "gemini-ai",
+    "google-promptwars",
+    "mental-health",
+    "drug-recovery",
+    "ai-therapy",
+    "cbt",
+    "healthcare",
+    "react",
+    "vite",
+    "hackathon"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@google/genai": "^2.13.0",
@@ -17,11 +43,27 @@
     "recharts": "^2.15.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
     "@tailwindcss/vite": "^4.0.7",
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.2.7",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
+    "globals": "^17.7.0",
+    "jsdom": "^29.1.1",
     "tailwindcss": "^4.0.7",
-    "vite": "^6.1.0"
+    "vite": "^6.1.0",
+    "vitest": "^3.2.7"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }

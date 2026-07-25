@@ -21,11 +21,18 @@ const MEETINGS_KEY = 'recoverai_meeting_logs_v3';
 const PLEDGE_KEY = 'recoverai_daily_pledge_v3';
 const API_KEY_STORAGE_KEY = 'recoverai_gemini_api_key_v3';
 
+// Optional build-time fallback, used for demo/preview deployments where the
+// operator supplies the key. A key entered in Settings always takes priority.
+// Note: any VITE_* value is inlined into the client bundle and is therefore
+// public — never use a production or unrestricted key here. See SECURITY.md.
+const ENV_API_KEY =
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GEMINI_API_KEY) || '';
+
 export const getStoredApiKey = () => {
   try {
-    return localStorage.getItem(API_KEY_STORAGE_KEY) || '';
+    return localStorage.getItem(API_KEY_STORAGE_KEY) || ENV_API_KEY;
   } catch (e) {
-    return '';
+    return ENV_API_KEY;
   }
 };
 
