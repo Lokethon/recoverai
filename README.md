@@ -76,7 +76,7 @@ RecoverAI is a comprehensive, AI-powered addiction recovery companion designed t
 
 ```bash
 # Clone the repository
-git clone https://github.com/<YOUR_USERNAME>/recoverai.git
+git clone https://github.com/Lokethon/recoverai.git
 cd recoverai
 
 # Install dependencies
