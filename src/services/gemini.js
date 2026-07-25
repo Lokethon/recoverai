@@ -38,7 +38,7 @@ export async function analyzeWithGemini(userMessage) {
   if (apiKey) {
     try {
       const ai = new GoogleGenAI({ apiKey });
-      const model = 'gemini-2.5-flash';
+      const model = 'gemini-3.6-flash';
 
       const response = await ai.models.generateContent({
         model: model,
@@ -86,7 +86,7 @@ Return JSON format:
 }`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: { responseMimeType: 'application/json', temperature: 0.4 }
       });
@@ -134,7 +134,7 @@ Return JSON format:
 }`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: { responseMimeType: 'application/json', temperature: 0.2 }
       });
@@ -171,7 +171,7 @@ Provide a concise 2-sentence Cognitive Behavioral Therapy (CBT) psychological in
 Return raw string response.`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: { temperature: 0.3 }
       });
@@ -202,7 +202,7 @@ Return JSON format:
 }`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
         config: { responseMimeType: 'application/json', temperature: 0.2 }
       });

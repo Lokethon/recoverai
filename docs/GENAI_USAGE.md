@@ -6,7 +6,7 @@ Everything below is verified against the code in this repository. Two sections y
 
 ## 📋 Short answer — for a submission form field
 
-> **Gen AI services used:** Google Gemini API (`gemini-2.5-flash`) via the `@google/genai` JavaScript SDK, and Google Antigravity as the development environment.
+> **Gen AI services used:** Google Gemini API (`gemini-3.6-flash`) via the `@google/genai` JavaScript SDK, and Google Antigravity as the development environment.
 >
 > **Where:** Gemini powers five distinct features in the app — emotional voice analysis, daily recovery planning, CBT journal reframing, 24-hour relapse risk prediction, and emergency crisis protocol generation — all implemented in `src/services/gemini.js`. Every call uses Gemini's JSON mode with a defined response schema, so AI output feeds the app's UI and analytics as structured data rather than free text. Google Antigravity was used to architect, generate, and iterate on the codebase throughout the build.
 
@@ -14,7 +14,7 @@ Everything below is verified against the code in this repository. Two sections y
 
 ## 🔍 Detailed answer — for the blog post or a longer form field
 
-### 1. Google Gemini API — `gemini-2.5-flash`
+### 1. Google Gemini API — `gemini-3.6-flash`
 
 **SDK:** `@google/genai` v2.13.0
 **Implementation:** `src/services/gemini.js`
