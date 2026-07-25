@@ -15,7 +15,7 @@ import {
 import { setAuthSession, saveStoredProfile, INITIAL_USER_PROFILE } from '../utils/storage';
 import { generateEmailVerificationCode, isValidEmail } from '../utils/security';
 
-export default function LandingLogin({ onLoginSuccess, isDarkMode }) {
+export default function LandingLogin({ onLoginSuccess, _isDarkMode }) {
   const [isRegister, setIsRegister] = useState(true);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

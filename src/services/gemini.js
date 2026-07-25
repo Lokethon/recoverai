@@ -66,7 +66,7 @@ export async function analyzeWithGemini(userMessage) {
 }
 
 // Gen AI Feature 1: AI Daily Morning Recovery Plan Generator
-export async function generateAIDailyPlan(profile, moodHistory, vitals) {
+export async function generateAIDailyPlan(profile, _moodHistory, _vitals) {
   const apiKey = getStoredApiKey();
   const userName = profile?.name || 'Friend';
 

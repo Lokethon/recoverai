@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ShieldCheck, Sparkles, TrendingDown, RefreshCcw, Activity, Heart, AlertCircle } from 'lucide-react';
 import { getBioTrackerMetrics } from '../utils/appleHealth';
 import { getStoredProfile, getStoredMoodHistory } from '../utils/storage';
@@ -12,16 +12,16 @@ export default function AIRelapsePredictor({ isDarkMode }) {
   const [prediction, setPrediction] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const handleRunPrediction = async () => {
+  const handleRunPrediction = useCallback(async () => {
     setIsAnalyzing(true);
     const res = await predictRelapseRiskAI(vitals, moodHistory, profile.recoveryStreak || 1);
     setPrediction(res);
     setIsAnalyzing(false);
-  };
+  }, [vitals, moodHistory, profile.recoveryStreak]);
 
   useEffect(() => {
     handleRunPrediction();
-  }, []);
+  }, [handleRunPrediction]);
 
   return (
     <div className={`p-6 rounded-3xl border transition-all shadow-xl ${

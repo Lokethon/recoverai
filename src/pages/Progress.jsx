@@ -53,7 +53,6 @@ import LogHealthVitalsModal from '../components/LogHealthVitalsModal';
 export default function Progress({ isDarkMode }) {
   const [profile, setProfileState] = useState(getStoredProfile());
   const [moodHistory, setMoodHistory] = useState(getStoredMoodHistory());
-  const [riskTrend, setRiskTrend] = useState(getStoredRiskTrend());
   const [journals, setJournals] = useState(getStoredJournals());
   const [cravingLogs, setCravingLogs] = useState(getCravingLogs());
   const [meetingLogs, setMeetingLogs] = useState(getMeetingLogs());

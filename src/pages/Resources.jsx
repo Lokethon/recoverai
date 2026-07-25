@@ -15,7 +15,7 @@ import {
 import { HEALTH_YOUTUBE_VIDEOS, RECOVERY_RESOURCES } from '../utils/mockData';
 import HospitalMapModal from '../components/HospitalMapModal';
 
-export default function Resources({ isDarkMode, onOpenBreathingModal }) {
+export default function Resources({ isDarkMode, _onOpenBreathingModal }) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [isHospitalMapOpen, setIsHospitalMapOpen] = useState(false);

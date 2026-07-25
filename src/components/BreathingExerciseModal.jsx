@@ -17,6 +17,7 @@ export default function BreathingExerciseModal({ isOpen, onClose, isDarkMode }) 
       setIsActive(false);
       setSecondsLeft(30);
       setPhase('Get Ready');
+      setPhaseSeconds(4);
       setIsCompleted(false);
     }
   }, [isOpen]);

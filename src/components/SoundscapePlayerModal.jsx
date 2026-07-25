@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X, Volume2, VolumeX, Play, Pause, Sparkles, CloudRain, Waves, Trees, Radio } from 'lucide-react';
 import { AMBIENT_SOUNDSCAPES } from '../utils/mockData';
 
@@ -11,13 +11,25 @@ export default function SoundscapePlayerModal({ isOpen, onClose, isDarkMode }) {
   const gainNodeRef = useRef(null);
   const oscRef = useRef(null);
 
+  const stopAudio = useCallback(() => {
+    if (oscRef.current) {
+      try {
+        oscRef.current.stop();
+      } catch (e) {
+        // Audio already stopped
+      }
+      oscRef.current = null;
+    }
+    setIsPlaying(false);
+  }, []);
+
   useEffect(() => {
     if (!isOpen && isPlaying) {
       stopAudio();
     }
-  }, [isOpen]);
+  }, [isOpen, isPlaying, stopAudio]);
 
-  const startAudio = (freq) => {
+  const startAudio = useCallback((freq) => {
     try {
       if (!audioCtxRef.current) {
         audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
@@ -37,7 +49,6 @@ export default function SoundscapePlayerModal({ isOpen, onClose, isDarkMode }) {
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq || 432, ctx.currentTime);
 
-      // Low pass filter for soft binaural ocean ambient feel
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
       filter.frequency.setValueAtTime(800, ctx.currentTime);
@@ -56,24 +67,14 @@ export default function SoundscapePlayerModal({ isOpen, onClose, isDarkMode }) {
       console.warn('Audio synthesis error:', e);
       setIsPlaying(true);
     }
-  };
+  }, [volume]);
 
-  const stopAudio = () => {
-    if (oscRef.current) {
-      try {
-        oscRef.current.stop();
-      } catch (e) {}
-      oscRef.current = null;
-    }
-    setIsPlaying(false);
-  };
-
-  const handleSelectSound = (sound) => {
+  const handleSelectSound = useCallback((sound) => {
     setActiveSoundId(sound.id);
     if (isPlaying) {
       startAudio(sound.freq);
     }
-  };
+  }, [isPlaying, startAudio]);
 
   const handleTogglePlay = () => {
     if (isPlaying) {

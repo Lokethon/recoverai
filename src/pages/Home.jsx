@@ -26,7 +26,6 @@ import {
 import {
   getStoredProfile,
   getStoredMoodHistory,
-  getCravingLogs,
   getStoredPledgeState,
   savePledgeState
 } from '../utils/storage';

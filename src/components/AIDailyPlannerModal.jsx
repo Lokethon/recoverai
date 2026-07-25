@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { X, Sparkles, CheckSquare, Square, RefreshCcw, ShieldCheck, Sun } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { getStoredProfile } from '../utils/storage';
@@ -10,18 +10,18 @@ export default function AIDailyPlannerModal({ isOpen, onClose, isDarkMode }) {
   const [plan, setPlan] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  React.useEffect(() => {
-    if (isOpen && !plan) {
-      handleGeneratePlan();
-    }
-  }, [isOpen]);
-
-  const handleGeneratePlan = async () => {
+  const handleGeneratePlan = useCallback(async () => {
     setIsLoading(true);
     const result = await generateAIDailyPlan(profile);
     setPlan(result);
     setIsLoading(false);
-  };
+  }, [profile]);
+
+  useEffect(() => {
+    if (isOpen && !plan) {
+      handleGeneratePlan();
+    }
+  }, [isOpen, plan, handleGeneratePlan]);
 
   const toggleTask = (index) => {
     if (!plan) return;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Mic,
   MicOff,
@@ -95,7 +95,7 @@ export default function VoiceChat({
     setIsListening(false);
 
     const userMsg = {
-      id: `usr-${Date.now()}`,
+      id: `usr-${crypto.getRandomValues(new Uint32Array(1))[0]}`,
       sender: 'user',
       text: sanitizedText,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -122,7 +122,7 @@ export default function VoiceChat({
     });
 
     const aiMsg = {
-      id: `ai-${Date.now()}`,
+      id: `ai-${crypto.getRandomValues(new Uint32Array(1))[0]}`,
       sender: 'ai',
       text: analysis.response ? analysis.response.replace(/Rahul/g, profile.name) : analysis.response,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -136,10 +136,10 @@ export default function VoiceChat({
     }
   };
 
-  const handleCallSister = () => {
+  const handleCallSister = useCallback(() => {
     const phone = profile.trustedContact?.phone || '+1 (555) 382-9910';
     window.location.href = `tel:${phone.replace(/[^0-9+]/g, '')}`;
-  };
+  }, [profile.trustedContact?.phone]);
 
   const handleFindRehab = () => {
     setActiveTab('emergency');

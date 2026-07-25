@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { X, Heart, Check, Sparkles } from 'lucide-react';
 import { saveMoodEntry } from '../utils/storage';
 
 export default function MoodSelectorModal({ isOpen, onClose, onMoodSelected, isDarkMode }) {
-  const [selectedMood, setSelectedMood] = useState('Calm');
-
   if (!isOpen) return null;
 
   const moods = [
@@ -16,7 +14,6 @@ export default function MoodSelectorModal({ isOpen, onClose, onMoodSelected, isD
   ];
 
   const handleSelect = (m) => {
-    setSelectedMood(m.name);
     const entry = {
       day: new Date().toLocaleDateString('en-US', { weekday: 'short' }),
       mood: m.name,
